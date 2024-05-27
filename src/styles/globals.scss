@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./breakpoints.scss";
 
 * {
   box-sizing: border-box;
@@ -79,6 +80,48 @@ body{
 }
 
 
+.btn-text-secondary{
+  border-radius: 32px;
+  height: 40px;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: $font-semibold;
+  font-size: 1.4rem;
+  color: $color-secondary;
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 1;
+  transition: opacity .365s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &.xs{
+    width: fit-content;
+  }
+
+  &:focus{
+    outline: 1px solid $color-primary;
+  }
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: $color-secondary;
+    color: $white;
+
+    svg {
+      path{
+        fill: $white;
+      }
+    }
+  }
+}
+
+
 .btn-error {
   border-radius: 32px;
   height: 40px;
@@ -150,6 +193,15 @@ body{
   background-color: $neutral-95;
   letter-spacing: 0.02rem;
 
+  &:disabled{
+    background-color: $neutral-99;
+    color: $neutral-80;
+
+    &::placeholder {
+      color: $neutral-90;
+    }
+  }
+
   &::placeholder {
     font-size: 1.4rem;
     font-weight: $font-regular;
@@ -160,6 +212,91 @@ body{
 
   &:focus {
     outline: 1px solid $neutral-10;
+  }
+}
+
+.layout-form{
+  height: calc(100vh - 72px);
+  overflow: auto;
+  
+  .form-container{
+    // height: inherit;
+    background-color: $white;
+    padding: 20px 16px;
+    display: grid;
+    gap: 32px;
+    align-content: start;
+
+    form{
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      >div:nth-child(2){
+        display: grid;
+        gap: 20px;  
+      }
+
+      h2{
+        font-size: 1.8rem;
+        color: $neutral-10;
+        font-weight: $font-bold;
+        text-align: center;
+        padding-bottom: 24px;
+      }
+
+      .range-salary{
+        font-size: 1.2rem;
+        color: $neutral;
+        font-weight: $font-medium;
+      }
+    }
+
+    .submit-form{
+      padding-top: 32px;
+      text-align: end;
+    }
+  }
+
+  @include media(lg){
+    padding: 24px;
+    height: calc(100vh - 80px);
+
+    .form-container{
+      width: 100%;
+      max-width: 600px;
+      min-width: 250px;
+      margin: 0 auto;
+      border-radius: 8px;
+      height: fit-content;
+      box-shadow: $card-shadow;
+    }
+  }
+}
+
+.input-container{
+  display: grid;
+  gap: 8px;
+  label{
+    font-size: 1.4rem;
+    color: $neutral-30;
+    font-weight: $font-semibold;
+  }
+
+  &.disable{
+    label{
+      color: $neutral-90;
+    }
+  }
+}
+
+.input-container-check{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  label{
+    font-size: 1.4rem;
+    color: $neutral-30;
+    font-weight: $font-semibold;
   }
 }
 

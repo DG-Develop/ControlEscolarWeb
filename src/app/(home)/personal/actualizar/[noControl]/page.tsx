@@ -2,10 +2,12 @@
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import BackIcon from "src/components/svg/BackIcon";
 import { axiosInstance } from "src/config/axios-instance";
 import { useListTipoPersonal } from "src/hooks/useListTipoPersonal";
 import { pipeDate } from "src/lib/pipes/pipeDate";
 import { pipeMoney } from "src/lib/pipes/pipeMoney";
+import style from "./actualizarnocontrol.module.scss";
 
 const ActualizaPersonal = () => {
   const params = useParams();
@@ -27,6 +29,8 @@ const ActualizaPersonal = () => {
 
   const [fechaNacimiento, setFechaNacimiento] = useState("");
 
+  const [tipoPersonal, setTipoPersonal] = useState<TipoPersonalDTO>();
+
   useEffect(() => {
     if (params["noControl"] && session) {
       (async function () {
@@ -42,19 +46,41 @@ const ActualizaPersonal = () => {
             setForm(data.resultado);
 
             setTimeout(() => {
-              setFechaNacimiento(pipeDate(new Date(data.resultado.fechaNacimiento)))
-            }, 323)
+              setFechaNacimiento(
+                pipeDate(new Date(data.resultado.fechaNacimiento))
+              );
+
+              if(listado){
+
+                setTipoPersonal(listado.find(lst => lst.idTipoPersonal == data.resultado.idTipoPersonal))
+              }
+            }, 323);
           }
         } catch (error) {}
       })();
     }
   }, [params, session]);
 
+
+  const obtenerRangoSalarial = (tipPersonalSeleccionado: TipoPersonalDTO | undefined) => {
+    if(listado.length <= 0){
+      return ""
+    }
+
+    if(!tipPersonalSeleccionado){
+      tipPersonalSeleccionado = listado[0];
+
+    }
+    return `${pipeMoney(tipPersonalSeleccionado.sueldoMinimo)} - ${pipeMoney(tipPersonalSeleccionado.sueldoMaximo)}`
+  }
+
   const handleChangeForm = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+
+    setTipoPersonal(tipoPersonal)
   };
 
   const handelChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -110,104 +136,116 @@ const ActualizaPersonal = () => {
   };
 
   return (
-    <section>
-      <div>
-        <button type="button" onClick={() => router.push("/")}>
-          <span></span>
-          <span>Volver</span>
-        </button>
-      </div>
-      <form onSubmit={handleSubmit}>
+    <section className="layout-form">
+      <div className="form-container">
         <div>
-          <h2>Formulario Administrativo de Personal</h2>
-        </div>
-        <div>
-          <div>
-            <label htmlFor="nombre">Nombre(s)</label>
-            <input
-              id="nombre"
-              type="text"
-              name="nombre"
-              className="form_input"
-              placeholder="Escribe tu nombre"
-              value={form.nombre}
-              onChange={handleChangeForm}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="apellidos">Apellidos</label>
-            <input
-              id="apellidos"
-              type="text"
-              name="apellidos"
-              placeholder="Escribe tus apellidos"
-              value={form.apellidos}
-              onChange={handleChangeForm}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="correoElectronico">Correo Electronico</label>
-            <input
-              id="correoElectronico"
-              type="email"
-              name="correoElectronico"
-              className="form_input"
-              placeholder="Escribe tu correo electronico"
-              value={form.correoElectronico}
-              onChange={handleChangeForm}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="tipoPersonal">Tipo Personal</label>
-            <select
-              name="tipoPersonal"
-              id="tipoPersonal"
-              onChange={handelChangeSelect}
-            >
-              {listado &&
-                listado.map((lst) => (
-                  <option key={lst.idTipoPersonal} value={lst.idTipoPersonal}>
-                    {lst.descripcion}
-                  </option>
-                ))}
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="fechaNacimiento">Fecha Nacimiento</label>
-            <input
-              id="fechaNacimiento"
-              type="date"
-              name="fechaNacimiento"
-              className="form_input"
-              value={fechaNacimiento}
-              onChange={(e) => setFechaNacimiento(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="sueldo">Sueldo</label>
-            <input
-              id="sueldo"
-              type="number"
-              name="sueldo"
-              className="form_input"
-              placeholder="D, H, E, etc.."
-              value={form.sueldo}
-              onChange={handleChangeForm}
-            />
-          </div>
-        </div>
-
-        <div>
-          <button type="submit" className="btn-primary xs">
-            Registrar
+          <button
+            type="button"
+            className="btn-text-secondary xs"
+            onClick={() => router.push("/")}
+          >
+            <BackIcon width="11px" height="8px" color={style.colorSecondary} />
+            <span>Volver</span>
           </button>
         </div>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <h2>Formulario Administrativo de Personal</h2>
+          </div>
+          <div>
+            <div className="input-container">
+              <label htmlFor="nombre">Nombre(s)</label>
+              <input
+                id="nombre"
+                type="text"
+                name="nombre"
+                className="form__input"
+                placeholder="Escribe tu nombre"
+                value={form.nombre}
+                onChange={handleChangeForm}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="apellidos">Apellidos</label>
+              <input
+                id="apellidos"
+                className="form__input"
+                type="text"
+                name="apellidos"
+                placeholder="Escribe tus apellidos"
+                value={form.apellidos}
+                onChange={handleChangeForm}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="correoElectronico">Correo Electronico</label>
+              <input
+                id="correoElectronico"
+                type="email"
+                name="correoElectronico"
+                className="form__input"
+                placeholder="Escribe tu correo electronico"
+                value={form.correoElectronico}
+                onChange={handleChangeForm}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="tipoPersonal">Tipo Personal</label>
+              <select
+                name="tipoPersonal"
+                id="tipoPersonal"
+                className="form__input"
+                value={form.idTipoPersonal}
+                onChange={handelChangeSelect}
+              >
+                {listado &&
+                  listado.map((lst) => (
+                    <option key={lst.idTipoPersonal} value={lst.idTipoPersonal}>
+                      {lst.descripcion}
+                    </option>
+                  ))}
+              </select>
+              <div className="range-salary">
+                {obtenerRangoSalarial(tipoPersonal)}
+              </div>
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="fechaNacimiento">Fecha Nacimiento</label>
+              <input
+                id="fechaNacimiento"
+                type="date"
+                name="fechaNacimiento"
+                className="form__input"
+                value={fechaNacimiento}
+                onChange={(e) => setFechaNacimiento(e.target.value)}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="sueldo">Sueldo</label>
+              <input
+                id="sueldo"
+                type="number"
+                name="sueldo"
+                className="form__input"
+                placeholder="D, H, E, etc.."
+                value={form.sueldo}
+                onChange={handleChangeForm}
+              />
+            </div>
+          </div>
+
+          <div className="submit-form">
+            <button type="submit" className="btn-primary xs">
+              Registrar
+            </button>
+          </div>
+        </form>
+      </div>
     </section>
   );
 };

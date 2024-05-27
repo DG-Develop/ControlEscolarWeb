@@ -6,6 +6,9 @@
   height: 70px;
   background-color: $white;
   box-shadow: $navbar-header-shadow;
+  position: relative;
+  z-index: 20;
+
   nav {
     padding: 16px;
     ul{
