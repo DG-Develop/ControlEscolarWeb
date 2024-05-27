@@ -1,0 +1,28 @@
+{
+  "name": "controlescolarweb",
+  "version": "1.0.0",
+  "description": "applicación web para control escolar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "David Gomez",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "1.7.2",
+    "next": "14.2.3",
+    "next-auth": "4.24.7",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sass": "1.77.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.12",
+    "@types/react": "18.3.3",
+    "typescript": "5.4.5"
+  }
+}

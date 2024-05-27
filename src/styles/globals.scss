@@ -1,0 +1,204 @@
+@import "./variables.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100vh;
+  font-size: 62.5%;
+  background-color: $background;
+}
+
+body{
+  height: inherit;
+}
+
+.home-layout{
+  height: inherit;
+}
+
+.btn-primary {
+  border-radius: 32px;
+  height: 40px;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: $font-semibold;
+  font-size: 1.4rem;
+  color: white;
+  background: $primary-button;
+  border: none;
+  outline: none;
+  opacity: 1;
+  transition: opacity .365s ease;
+
+  &.xs{
+    width: fit-content;
+  }
+
+  &:focus{
+    outline: 1px solid $color-primary;
+  }
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.btn-text-primary{
+  border-radius: 32px;
+  height: 40px;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: $font-semibold;
+  font-size: 1.4rem;
+  color: $color-primary;
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 1;
+  transition: opacity .365s ease;
+
+  &.xs{
+    width: fit-content;
+  }
+
+  &:focus{
+    outline: 1px solid $color-primary;
+  }
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: $color-primary;
+    color: $white;
+  }
+}
+
+
+.btn-error {
+  border-radius: 32px;
+  height: 40px;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: $font-semibold;
+  font-size: 1.4rem;
+  color: white;
+  background: $error;
+  border: none;
+  outline: none;
+  opacity: 1;
+  transition: opacity .365s ease;
+
+  &.xs{
+    width: fit-content;
+  }
+
+  &:focus{
+    outline: 1px solid $error;
+  }
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.btn-text-error{
+  border-radius: 32px;
+  height: 40px;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: $font-semibold;
+  font-size: 1.4rem;
+  color: $error;
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 1;
+  transition: opacity .365s ease;
+
+  &.xs{
+    width: fit-content;
+  }
+
+  &:focus{
+    outline: 1px solid $color-primary;
+  }
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: $error;
+    color: $white;
+  }
+}
+
+.form__input {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  color: $neutral-30;
+  font-size: 1.4rem;
+  font-weight: $font-semibold;
+  outline: none;
+  background-color: $neutral-95;
+  letter-spacing: 0.02rem;
+
+  &::placeholder {
+    font-size: 1.4rem;
+    font-weight: $font-regular;
+    color: $neutral-60;
+    letter-spacing: 0.02rem;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &:focus {
+    outline: 1px solid $neutral-10;
+  }
+}
+
+// .loader_content {
+//   width: 100%;
+//   height: 4.8px;
+//   display: inline-block;
+//   position: relative;
+//   background: $gray-focused;
+//   overflow: hidden;
+//   transform: translateY(10px);
+//   opacity: 0;
+//   transition: transform 0.365s ease-out, opacity 0.65s;
+
+//   &::after {
+//     content: "";
+//     width: 192px;
+//     height: 4.8px;
+//     background: $brow;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     box-sizing: border-box;
+//     animation: animloader 2s linear infinite;
+//   }
+// }
+
+// .loader_content.active {
+//   transform: translateY(0);
+//   opacity: 1;
+// }
+
+// @keyframes animloader {
+//   0% {
+//     left: 0;
+//     transform: translateX(-100%);
+//   }
+//   100% {
+//     left: 100%;
+//     transform: translateX(0%);
+//   }
+// }

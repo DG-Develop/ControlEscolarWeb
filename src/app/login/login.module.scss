@@ -1,0 +1,100 @@
+@import "../../styles/variables.scss";
+@import "../../styles/breakpoints.scss";
+
+.login-section {
+  height: inherit;
+  .container {
+    background-color: $white;
+    padding: 20px 16px;
+    height: 100%;
+    width: 100%;
+
+    .presentation {
+      display: none;
+    }
+
+    .login-form {
+      form {
+        margin-top: 120px;
+        display: grid;
+        gap: 24px;
+        align-items: center;
+
+        h2{
+          font-weight: $font-bold;
+          font-size: 1.8rem;
+          color: $neutral-10;
+          letter-spacing: 0.05rem;
+          text-align: center;
+          margin-bottom: 8px;
+        }
+
+        h4{
+          font-weight: $font-medium;
+          font-size: 1.6rem;
+          color: $neutral-10;
+          letter-spacing: 0.05rem;
+          text-align: center;
+        }
+
+        >div:nth-child(2){
+          display: grid;
+          gap: 16px
+        }
+        .input-password{
+          position: relative;
+          
+
+          input{
+            padding-right: 62px;
+          }
+          svg{
+            
+            position: absolute;
+            right: 16px;
+            top: 0;
+          }
+        }
+        
+      }
+    }
+  }
+
+  @include media(lg){
+    padding-top: 80px;
+
+    .container {
+      max-width: 1000px;
+      height: 500px;
+      border-radius: 16px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      box-shadow: $card-elevation;
+
+      .presentation {
+        display: grid;
+        justify-content: center;
+        align-items: end;
+      }
+
+      .login-form {
+        display: grid;
+        align-items: center;
+        
+        form {
+          width: 100%;
+        max-width: 400px;
+        min-width: 250px;
+        margin: 0 auto;
+          margin-top: 0;
+          // display: grid;
+          // gap: 24px;
+          // align-items: center;
+  
+        }
+      }
+    }
+  }
+}

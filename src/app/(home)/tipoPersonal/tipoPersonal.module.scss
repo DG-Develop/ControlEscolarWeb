@@ -1,0 +1,76 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/breakpoints.scss";
+
+
+.tipoPersonal{
+  height: calc(100vh - 72px);
+  padding: 16px 8px;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+
+  .heading-actions{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .lst-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: auto;
+    height: calc(100vh - 160px);
+  }
+
+  .card-tipoPersonal{
+    background-color: $white;
+    border-radius: 8px;
+    padding: 20px 8px;
+    display: grid;
+    gap: 8px;
+
+    >div:first-child{
+      padding-bottom: 32px;
+      border-bottom: 1px solid $neutral-80;
+    }
+
+    .card-actions{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+
+      a{
+        width: 100%;
+      }
+    }
+
+    p{
+      font-size: 1.6rem;
+      font-weight: $font-bold;
+      color: $neutral-30;
+      text-align: center;
+    }
+  }
+
+  @include media(lg){
+    width: 100%;
+    min-width: 250px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px;
+    gap: 32px;
+
+    .lst-container{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      align-content: start;
+      height: calc(100vh - 200px);
+    }
+
+    .card-tipoPersonal{
+      height: 150px;
+    }
+  }
+}
