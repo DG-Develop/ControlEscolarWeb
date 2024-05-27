@@ -91,7 +91,12 @@ const AgregarPersonal = () => {
         } else {
           alert("No se pudo registrar");
         }
-      } catch (e) {}
+      } catch (e) {
+        if(e.response){
+          const respuesta = e.response.data
+          alert(respuesta.Mensaje)
+        }
+      }
     } else {
       alert(
         "No puedes guardar un sueldo menor que " +

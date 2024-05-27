@@ -5,5 +5,8 @@ export const config = {
     '/',
     '/tipoPersonal',
     '/tipoPersonal/agregar',
+    '/tipoPersonal/actualizar/:path*',
+    '/personal/agregar',
+    '/personal/actualizar/:path*',
   ]
 }

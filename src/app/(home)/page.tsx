@@ -6,6 +6,8 @@ import { axiosInstance } from "src/config/axios-instance";
 import Link from "next/link";
 import { pipeMoney } from "src/lib/pipes/pipeMoney";
 import style from "./home.module.scss";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Home = () => {
   const history = useRouter();
@@ -128,6 +130,24 @@ const Home = () => {
     } catch (error) {}
   };
 
+  const submit = (numeroControl: string) => {
+    confirmAlert({
+      title: 'Confirmar',
+      message: '¿Estás seguro de querer eliminar el registro?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleElimarPersonal(numeroControl)
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    });
+  };
+
+
   return (
     <section className={style["home"]}>
       <div className={style["heading-actions"]}>
@@ -171,13 +191,13 @@ const Home = () => {
                 <div className={style["card-actions"]}>
                   <Link href={`/personal/actualizar/${lst.numeroControl}`}>
                     <button type="button" className="btn-text-primary">
-                      Actualizar
+                      Editar
                     </button>
                   </Link>
                   <button
                     type="button"
                     className="btn-text-error"
-                    onClick={() => handleElimarPersonal(lst.numeroControl)}
+                    onClick={() => submit(lst.numeroControl)}
                   >
                     Eliminar
                   </button>

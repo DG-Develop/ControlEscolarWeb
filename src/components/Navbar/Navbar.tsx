@@ -15,9 +15,9 @@ const Navbar = () => {
           <li>
             <Link href={"/"}>Personal</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href={"/alumnos"}>Alumnado</Link>
-          </li>
+          </li> */}
           <li>
             <Link href={"/tipoPersonal"}>Tipo Personal</Link>
           </li>

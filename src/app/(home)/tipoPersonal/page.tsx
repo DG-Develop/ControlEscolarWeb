@@ -7,6 +7,8 @@ import React from "react";
 import { axiosInstance } from "src/config/axios-instance";
 import { useListTipoPersonal } from "src/hooks/useListTipoPersonal";
 import style from './tipoPersonal.module.scss';
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const tipoPersonal = () => {
   const history = useRouter();
@@ -29,6 +31,23 @@ const tipoPersonal = () => {
         alert(data.resultado)
       }
     } catch (error) {}
+  };
+
+  const submit = (idTipoPersonal: number) => {
+    confirmAlert({
+      title: 'Confirmar',
+      message: '¿Estás seguro de querer eliminar el registro?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleElimarTipoPersonal(idTipoPersonal)
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    });
   };
 
   return (
@@ -57,7 +76,7 @@ const tipoPersonal = () => {
                 <button
                   type="button"
                   className="btn-text-error"
-                  onClick={() => handleElimarTipoPersonal(lst.idTipoPersonal)}
+                  onClick={() => submit(lst.idTipoPersonal)}
                 >
                   Eliminar
                 </button>
