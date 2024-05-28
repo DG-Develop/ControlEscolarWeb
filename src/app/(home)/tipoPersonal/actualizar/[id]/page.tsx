@@ -117,7 +117,7 @@ const ActualizaTipoPersonal = () => {
               />
             </div>
 
-            <div className="input-container">
+            <div className="input-container-check">
               <label htmlFor="tieneSueldo">Tiene Sueldo</label>
               <input
                 id="tieneSueldo"

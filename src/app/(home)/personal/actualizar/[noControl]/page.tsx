@@ -50,9 +50,12 @@ const ActualizaPersonal = () => {
                 pipeDate(new Date(data.resultado.fechaNacimiento))
               );
 
-              if(listado){
-
-                setTipoPersonal(listado.find(lst => lst.idTipoPersonal == data.resultado.idTipoPersonal))
+              if (listado) {
+                setTipoPersonal(
+                  listado.find(
+                    (lst) => lst.idTipoPersonal == data.resultado.idTipoPersonal
+                  )
+                );
               }
             }, 323);
           }
@@ -61,18 +64,20 @@ const ActualizaPersonal = () => {
     }
   }, [params, session]);
 
-
-  const obtenerRangoSalarial = (tipPersonalSeleccionado: TipoPersonalDTO | undefined) => {
-    if(listado.length <= 0){
-      return ""
+  const obtenerRangoSalarial = (
+    tipPersonalSeleccionado: TipoPersonalDTO | undefined
+  ) => {
+    if (listado.length <= 0) {
+      return "";
     }
 
-    if(!tipPersonalSeleccionado){
+    if (!tipPersonalSeleccionado) {
       tipPersonalSeleccionado = listado[0];
-
     }
-    return `${pipeMoney(tipPersonalSeleccionado.sueldoMinimo)} - ${pipeMoney(tipPersonalSeleccionado.sueldoMaximo)}`
-  }
+    return `${pipeMoney(tipPersonalSeleccionado.sueldoMinimo)} - ${pipeMoney(
+      tipPersonalSeleccionado.sueldoMaximo
+    )}`;
+  };
 
   const handleChangeForm = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -80,7 +85,7 @@ const ActualizaPersonal = () => {
       [e.target.name]: e.target.value,
     });
 
-    setTipoPersonal(tipoPersonal)
+    setTipoPersonal(tipoPersonal);
   };
 
   const handelChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -133,6 +138,13 @@ const ActualizaPersonal = () => {
           pipeMoney(tipoPersonal.sueldoMaximo)
       );
     }
+  };
+
+  const handleChangeEstatus = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
   };
 
   return (
@@ -222,6 +234,17 @@ const ActualizaPersonal = () => {
                 className="form__input"
                 value={fechaNacimiento}
                 onChange={(e) => setFechaNacimiento(e.target.value)}
+              />
+            </div>
+
+            <div className="input-container-check">
+              <label htmlFor="estatus">Estatus</label>
+              <input
+                id="estatus"
+                type="checkbox"
+                name="estatus"
+                checked={form.estatus}
+                onChange={handleChangeEstatus}
               />
             </div>
 
